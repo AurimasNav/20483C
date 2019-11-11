@@ -158,12 +158,17 @@ namespace School
         {
             // Convert the date of birth provided in the value parameter and convert to the age of the student in years
             // TODO: Exercise 4: Task 2a: Check that the value provided is not null. If it is, return an empty string
+            if (value == null)
+            {
+                return string.Empty;
+            }
             // TODO: Exercise 4: Task 2b: Convert the value provided into a DateTime value
+            DateTime DateOfBirth = DateTime.Parse(value.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
             // TODO: Exercise 4: Task 2c: Work out the difference between the current date and the value provided
+            TimeSpan AgeSpan = DateTime.Now.Subtract(DateOfBirth);
             // TODO: Exercise 4: Task 2d: Convert this result into a number of years
             // TODO: Exercise 4: Task 2e: Convert the number of years into a string and return it
-
-            return "";
+            return ((int)(AgeSpan.TotalDays / 365.25)).ToString();
         }
 
         #region Predefined code
