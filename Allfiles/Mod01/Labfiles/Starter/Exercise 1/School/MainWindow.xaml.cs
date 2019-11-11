@@ -62,17 +62,19 @@ namespace School
             {
                 case Key.Enter:
                     Student Student = studentsList.SelectedItem as Student;
+
                     // TODO: Exercise 1: Task 2a: Use the StudentsForm to display and edit the details of the student
                     StudentForm sf = new StudentForm()
                     {
                         // TODO: Exercise 1: Task 2b: Set the title of the form and populate the fields on the form with the details of the student
                         Title = "Edit Student Details",
                     };
+
                     // TODO: Exercise 1: Task 3a: Display the form
                     sf.firstName.Text = Student.FirstName;
                     sf.lastName.Text = Student.LastName;
                     sf.dateOfBirth.Text = Student.DateOfBirth.ToString("d");
-                    
+
                     // TODO: Exercise 1: Task 3b: When the user closes the form, copy the details back to the student
                     if (sf.ShowDialog().Value)
                     {
@@ -86,18 +88,13 @@ namespace School
                 default:
                     break;
             }
-            
-            
-            
-            
-            
         }
 
         #region Predefined code
 
         private void studentsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
- 
+
         }
 
         // Save changes back to the database and make them permanent
