@@ -87,7 +87,7 @@ namespace School
 
                 // TODO: Exercise 2: Task 1a: If the user pressed Insert, add a new student
                 case Key.Insert:
-                    
+
                     // TODO: Exercise 2: Task 2a: Use the StudentsForm to get the details of the student from the user
                     StudentForm newStudentForm = new StudentForm()
                     {
@@ -113,16 +113,6 @@ namespace School
                         saveChanges.IsEnabled = true;
                     }
                     break;
-
-
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
             }
         }
 
