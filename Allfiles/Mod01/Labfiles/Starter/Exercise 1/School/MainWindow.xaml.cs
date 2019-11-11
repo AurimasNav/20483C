@@ -58,11 +58,39 @@ namespace School
         private void studentsList_KeyDown(object sender, KeyEventArgs e)
         {
             // TODO: Exercise 1: Task 1a: If the user pressed Enter, edit the details for the currently selected student
-            // TODO: Exercise 1: Task 2a: Use the StudentsForm to display and edit the details of the student
-            // TODO: Exercise 1: Task 2b: Set the title of the form and populate the fields on the form with the details of the student
-            // TODO: Exercise 1: Task 3a: Display the form
-            // TODO: Exercise 1: Task 3b: When the user closes the form, copy the details back to the student
-            // TODO: Exercise 1: Task 3c: Enable saving (changes are not made permanent until they are written back to the database)
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    Student Student = studentsList.SelectedItem as Student;
+                    // TODO: Exercise 1: Task 2a: Use the StudentsForm to display and edit the details of the student
+                    StudentForm sf = new StudentForm()
+                    {
+                        // TODO: Exercise 1: Task 2b: Set the title of the form and populate the fields on the form with the details of the student
+                        Title = "Edit Student Details",
+                    };
+                    // TODO: Exercise 1: Task 3a: Display the form
+                    sf.firstName.Text = Student.FirstName;
+                    sf.lastName.Text = Student.LastName;
+                    sf.dateOfBirth.Text = Student.DateOfBirth.ToString("d");
+                    
+                    // TODO: Exercise 1: Task 3b: When the user closes the form, copy the details back to the student
+                    if (sf.ShowDialog().Value)
+                    {
+                        Student.FirstName = sf.firstName.Text;
+                        Student.LastName = sf.lastName.Text;
+                        Student.DateOfBirth = DateTime.Parse(sf.dateOfBirth.Text, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
+                    }
+                    // TODO: Exercise 1: Task 3c: Enable saving (changes are not made permanent until they are written back to the database)
+                    saveChanges.IsEnabled = true;
+                    break;
+                default:
+                    break;
+            }
+            
+            
+            
+            
+            
         }
 
         #region Predefined code
