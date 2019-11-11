@@ -61,7 +61,8 @@ namespace School
             switch (e.Key)
             {
                 // If the user pressed Enter, edit the details for the currently selected student
-                case Key.Enter: Student student = this.studentsList.SelectedItem as Student;
+                case Key.Enter:
+                    Student student = this.studentsList.SelectedItem as Student;
 
                     // Use the StudentsForm to display and edit the details of the student
                     StudentForm sf = new StudentForm();
@@ -84,14 +85,44 @@ namespace School
                     }
                     break;
 
-                    // TODO: Exercise 2: Task 1a: If the user pressed Insert, add a new student
+                // TODO: Exercise 2: Task 1a: If the user pressed Insert, add a new student
+                case Key.Insert:
+                    
                     // TODO: Exercise 2: Task 2a: Use the StudentsForm to get the details of the student from the user
-                    // TODO: Exercise 2: Task 2b: Set the title of the form to indicate which class the student will be added to (the class for the currently selected teacher)
+                    StudentForm newStudentForm = new StudentForm()
+                    {
+                        // TODO: Exercise 2: Task 2b: Set the title of the form to indicate which class the student will be added to (the class for the currently selected teacher)
+                        Title = "New Student for Class " + teacher.Class
+                    };
+
                     // TODO: Exercise 2: Task 3a: Display the form and get the details of the new student
-                    // TODO: Exercise 2: Task 3b: When the user closes the form, retrieve the details of the student from the form and use them to create a new Student object
-                    // TODO: Exercise 2: Task 4a: Assign the new student to the current teacher
-                    // TODO: Exercise 2: Task 4b: Add the student to the list displayed on the form
-                    // TODO: Exercise 2: Task 4c: Enable saving (changes are not made permanent until they are written back to the database)
+                    if (newStudentForm.ShowDialog().Value)
+                    {
+                        // TODO: Exercise 2: Task 3b: When the user closes the form, retrieve the details of the student from the form and use them to create a new Student object
+                        Student newStudent = new Student()
+                        {
+                            FirstName = newStudentForm.firstName.Text,
+                            LastName = newStudentForm.lastName.Text,
+                            DateOfBirth = DateTime.Parse(newStudentForm.dateOfBirth.Text, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
+                        };
+                        // TODO: Exercise 2: Task 4a: Assign the new student to the current teacher
+                        teacher.Students.Add(newStudent);
+                        // TODO: Exercise 2: Task 4b: Add the student to the list displayed on the form
+                        studentsInfo.Add(newStudent);
+                        // TODO: Exercise 2: Task 4c: Enable saving (changes are not made permanent until they are written back to the database)
+                        saveChanges.IsEnabled = true;
+                    }
+                    break;
+
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
             }
         }
 
@@ -99,7 +130,7 @@ namespace School
 
         private void studentsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
- 
+
         }
 
         // Save changes back to the database and make them permanent
