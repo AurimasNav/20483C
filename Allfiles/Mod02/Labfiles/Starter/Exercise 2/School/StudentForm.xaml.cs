@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 
 namespace School
@@ -21,7 +22,30 @@ namespace School
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Exercise 2: Task 2a: Check that the user has provided a first name
-            // TODO: Exercise 2: Task 2b: Check that the user has provided a last name
+            if (string.IsNullOrEmpty(firstName.Text))
+            {
+                MessageBox.Show("The student must have a frist name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(lastName.Text))
+            {
+                MessageBox.Show("The student must have a last name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+
+
+            if (string.IsNullOrEmpty(dateOfBirth.Text) || !(DateTime.TryParse(dateOfBirth.Text, out _)))
+            {
+                MessageBox.Show("Must be valid date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            TimeSpan Age = DateTime.Now.Subtract((DateTime.Parse(dateOfBirth.Text, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)));            // TODO: Exercise 2: Task 2b: Check that the user has provided a last name
+            if ((Age.TotalDays / 365.25) < 5)
+            {
+                MessageBox.Show("The student must be at least 5 years old", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             // TODO: Exercise 2: Task 3a: Check that the user has entered a valid date for the date of birth
             // TODO: Exercise 2: Task 3b: Verify that the student is at least 5 years old
 
