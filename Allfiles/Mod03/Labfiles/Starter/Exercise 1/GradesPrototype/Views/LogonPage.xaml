@@ -28,7 +28,7 @@
                 <CheckBox x:Name="userrole" Grid.Row="2"  Grid.Column="2" FontSize="24" IsChecked="False" VerticalAlignment="Center"/>
                 
                 <!-- TODO: Exercise 1: Task 2c: Specify that the Logon button should raise the Logon_Click event handler in this view-->
-                <Button Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Log on" FontSize="24" />
+                <Button Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Log on" FontSize="24" Click="Logon_Click" />
             </Grid>
         </Grid> 
     </Grid>

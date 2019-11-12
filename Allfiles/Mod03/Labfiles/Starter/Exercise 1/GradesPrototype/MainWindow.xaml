@@ -29,7 +29,7 @@
             <Grid Grid.Row="1">
                 <!-- CONTENT -->
                 <!-- TODO: Exercise 1: Task 3c: Catch the LogonSuccess event and call the Logon_Success event handler (to be created)-->
-                <y:LogonPage x:Name="logonPage"  Visibility="Collapsed" />
+                <y:LogonPage x:Name="logonPage" LogonSuccess="Logon_Success" Visibility="Collapsed" />
                 
                 <!-- TODO: Exercise 1: Task 5c: Catch the StudentSelected event and call the studentsPage_StudentSelected event handler-->
                 <y:StudentsPage x:Name="studentsPage" Visibility="Collapsed" />

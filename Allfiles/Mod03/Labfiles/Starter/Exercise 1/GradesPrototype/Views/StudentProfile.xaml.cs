@@ -56,7 +56,7 @@ namespace GradesPrototype.Views
         // Grades data is hardcoded in the XAML code for the StudentProfile view in this version of the prototype
         public void Refresh()
         {
-
+            Match matchNames = Regex.Match(SessionContext.CurrentStudent, @"([^ ]+) ([^ ]+)");
         }
     }
 }
