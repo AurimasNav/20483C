@@ -88,7 +88,8 @@ namespace GradesPrototype
         // Set the global context to the name of the student and call the GotoStudentProfile method to display the details of the student
         private void studentsPage_StudentSelected(object sender, StudentEventArgs e)
         {
-
+            SessionContext.CurrentStudent = e.Child;
+            GotoStudentProfile();
         }
         #endregion
 
@@ -97,17 +98,15 @@ namespace GradesPrototype
         // TODO: Exercise 1: Task 4a: Update the display for the logged on user (student or teacher)
         private void Refresh()
         {
+
+            txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
             switch (SessionContext.UserRole)
             {
                 case Role.Teacher:
-                    txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
                     GotoStudentsPage();
                     break;
                 case Role.Student:
-                    txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
                     GotoStudentProfile();
-                    break;
-                default:
                     break;
             }
         }
