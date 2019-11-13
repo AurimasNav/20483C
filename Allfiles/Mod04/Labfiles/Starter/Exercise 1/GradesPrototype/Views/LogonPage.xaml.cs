@@ -41,12 +41,12 @@ namespace GradesPrototype.Views
             // TODO: Exercise 1: Task 3a: Use the VerifyPassword method of the Teacher class to verify the teacher's password
             var teacher = (from Teacher t in DataSource.Teachers
                            where String.Compare(t.UserName, username.Text) == 0
-                           && String.Compare(t.Password, password.Password) == 0
+                           && t.VerifyPassword(password.Password)
                            select t).FirstOrDefault();
 
             // If the UserName of the user retrieved by using LINQ is non-empty then the user is a teacher
             // TODO: Exercise 1: Task 3b: Check whether teacher is null before examining the UserName property
-            if (!String.IsNullOrEmpty(teacher.UserName))
+            if (null != teacher && !string.IsNullOrEmpty(teacher.UserName))
             {
                 // Save the UserID and Role (teacher or student) and UserName in the global context
                 SessionContext.UserID = teacher.TeacherID;
@@ -64,12 +64,12 @@ namespace GradesPrototype.Views
                 // TODO: Exercise 1: Task 3c: Use the VerifyPassword method of the Student class to verify the student's password
                 var student = (from Student s in DataSource.Students
                                where String.Compare(s.UserName, username.Text) == 0
-                               && String.Compare(s.Password, password.Password) == 0
+                               && s.VerifyPassword(password.Password)
                                select s).FirstOrDefault();
 
                 // If the UserName of the user retrieved by using LINQ is non-empty then the user is a student
                 // TODO: Exercise 1: Task 3d: Check whether student is null before examining the UserName property
-                if (!String.IsNullOrEmpty(student.UserName))
+                if (null != student && !String.IsNullOrEmpty(student.UserName))
                 {
                     // Save the details of the student in the global context
                     SessionContext.UserID = student.StudentID;
