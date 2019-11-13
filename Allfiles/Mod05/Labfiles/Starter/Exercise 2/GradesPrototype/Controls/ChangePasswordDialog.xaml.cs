@@ -30,6 +30,34 @@ namespace GradesPrototype.Controls
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Exercise 2: Task 4a: Get the details of the current user
+            User user;
+            if (SessionContext.UserRole == Role.Student)
+            {
+                user = SessionContext.CurrentStudent;
+            }
+            else if (SessionContext.UserRole == Role.Teacher)
+            {
+                user = SessionContext.CurrentTeacher;
+            }
+            else
+            {
+                throw new ArgumentException($"Unxpected role {SessionContext.UserRole}");
+            }
+            if (!user.VerifyPassword(oldPassword.Password))
+            {
+                MessageBox.Show("Old password is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (newPassword.Password != confirm.Password)
+            {
+                MessageBox.Show("The new password and confirm fields are different", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!user.SetPassword(newPassword.Password))
+            {
+                MessageBox.Show("The new password is not complex enough", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             // TODO: Exercise 2: Task 4b: Check that the old password is correct for the current user
 
