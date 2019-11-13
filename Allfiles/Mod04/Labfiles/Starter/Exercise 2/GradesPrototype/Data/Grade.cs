@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -28,11 +29,11 @@ namespace GradesPrototype.Data
             }
             set
             {
-                if (DateTime.TryParse(value, out _))
+                if (!DateTime.TryParse(value, out _))
                 {
                     throw new ArgumentException("Invalid date provided.");
                 }
-                if ((DateTime.Now - DateTime.Parse(value)).TotalSeconds < 0)
+                if ((DateTime.Now - DateTime.Parse(value,CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)).TotalSeconds < 0)
                 {
                     throw new ArgumentOutOfRangeException("Provided date is in the future.");
                 }
