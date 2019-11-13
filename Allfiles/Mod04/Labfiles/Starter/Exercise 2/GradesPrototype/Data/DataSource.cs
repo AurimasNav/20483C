@@ -15,7 +15,7 @@ namespace GradesPrototype.Data
         public static ArrayList Teachers;
         public static ArrayList Students;
         public static ArrayList Grades;
-        
+        public static List<string> Subjects;
         // TODO: Exercise 2: Task 1a: Define a List collection for holding the names of valid subjects
 
         #region Sample Data
@@ -113,6 +113,8 @@ namespace GradesPrototype.Data
                 new Grade() { StudentID = 15, AssessmentDate = DateTime.Now.ToString("d"), SubjectName = "Geography", Assessment = "C-", Comments = "Could do better" },
                 new Grade() { StudentID = 15, AssessmentDate = DateTime.Now.ToString("d"), SubjectName = "History", Assessment = "D-", Comments = "Needs to work harder" },
             };
+
+            Subjects = new List<string>() {"Math", "English", "History", "Geography", "Science" };
         }
         #endregion
     }

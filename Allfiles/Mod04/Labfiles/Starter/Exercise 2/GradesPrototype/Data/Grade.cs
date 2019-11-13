@@ -14,19 +14,71 @@ namespace GradesPrototype.Data
 
     public class Grade
     {
+        private string assessmentDate;
+        private string subjectName;
+        private string assessment;
         public int StudentID { get; set; }
 
         // TODO: Exercise 2: Task 2a: Add validation to the AssessmentDate property
-        public string AssessmentDate { get; set; }
-        
+        public string AssessmentDate
+        {
+            get
+            {
+                return assessmentDate;
+            }
+            set
+            {
+                if (DateTime.TryParse(value, out _))
+                {
+                    throw new ArgumentException("Invalid date provided.");
+                }
+                if ((DateTime.Now - DateTime.Parse(value)).TotalSeconds < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Provided date is in the future.");
+                }
+                assessmentDate = value;
+            }
+        }
+
         // TODO: Exercise 2: Task 2b: Add validation to the SubjectName property
-        public string SubjectName { get; set; }
+        public string SubjectName
+        {
+            get
+            {
+                return subjectName;
+            }
+            set
+            {
+                if (DataSource.Subjects.Contains(value))
+                {
+                    subjectName = value;
+                    return;
+                }
+                throw new ArgumentException($"Subject {value} is not in the list of defined subjects");
+            }
+        }
 
         // TODO: Exercise 2: Task 2c: Add validation to the Assessment property
-        public string Assessment { get; set; }
+        public string Assessment 
+        { 
+            get 
+            {
+                return assessment;
+            } 
+            set 
+            {
+                Match matchGrade = Regex.Match(value, @"[A-E][+-]?$");
+                if (matchGrade.Success == true)
+                {
+                    assessment = value;
+                    return;
+                }
+                throw new ArgumentOutOfRangeException("Provided grade does not match validation pattern");
+            }
+        }
 
         public string Comments { get; set; }
-                
+
         // Constructor to initialize the properties of a new Grade
         public Grade(int studentID, string assessmentDate, string subject, string assessment, string comments)
         {
@@ -54,18 +106,19 @@ namespace GradesPrototype.Data
         public string UserName { get; set; }
 
         private string _password = Guid.NewGuid().ToString(); // Generate a random password by default
-        public string Password { 
-            set 
-            { 
-                _password = value; 
-            } 
+        public string Password
+        {
+            set
+            {
+                _password = value;
+            }
         }
 
         public bool VerifyPassword(string pass)
         {
             return (String.Compare(pass, _password) == 0);
         }
-        
+
         public int TeacherID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
