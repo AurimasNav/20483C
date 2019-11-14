@@ -92,7 +92,10 @@ namespace GradesPrototype.Controls
                 }
             }
             // TODO: Exercise 3: Task 2c: Catch and handle the ClassFullException
-
+            catch (ClassFullException ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to enroll student - class is full.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error enrolling student", MessageBoxButton.OK, MessageBoxImage.Error);
